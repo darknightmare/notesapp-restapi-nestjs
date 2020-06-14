@@ -1,7 +1,6 @@
 import { Schema } from 'mongoose';
-import { title } from 'process';
 
-export const noteSchema = new Schema(
+export const NoteSchema = new Schema(
     {
         id: {
             type: Number,
