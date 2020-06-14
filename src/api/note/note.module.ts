@@ -7,7 +7,7 @@ import { NoteSchema } from './note.schema';
 @Module({
   imports: [
     MongooseModule.forFeature([{
-      name: 'Notes', // Collection
+      name: 'Notes',
       schema: NoteSchema,
     }], 'notes')
   ],

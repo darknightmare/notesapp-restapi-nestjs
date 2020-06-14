@@ -12,19 +12,19 @@ export class NoteService {
         return await this.noteModel.find();
     }
 
-    public async getNote(noteId: string): Promise<Note> {
-        return await this.noteModel.findById(noteId);
+    public async getNote(id: string): Promise<Note> {
+        return await this.noteModel.findById(id);
     }
 
     public async postNote(DTO: noteDTO): Promise<Note> {
         return await new this.noteModel(DTO).save();
     }
 
-    public async putNote(noteId: string, DTO: noteDTO): Promise<Note> {
-        return await this.noteModel.findByIdAndUpdate(noteId, DTO, {new: true});
+    public async putNote(id: string, DTO: noteDTO): Promise<Note> {
+        return await this.noteModel.findByIdAndUpdate(id, DTO, {new: true});
     }
 
-    public async deleteNote(noteId: string): Promise<Note> {
-        return await this.noteModel.findByIdAndDelete(noteId);
+    public async deleteNote(id: string): Promise<Note> {
+        return await this.noteModel.findByIdAndDelete(id);
     }
 }
