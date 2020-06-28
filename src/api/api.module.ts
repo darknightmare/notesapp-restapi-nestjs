@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { NoteModule } from './note/note.module';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
-  imports: [NoteModule]
+  imports: [NotesModule]
 })
 export class ApiModule {}

@@ -4,12 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
     imports: [
         MongooseModule.forRootAsync({
-            connectionName: 'auth',
-            useFactory: () => ({
-                uri: ''
-            })
-        }),
-        MongooseModule.forRootAsync({
             connectionName: 'notes',
             useFactory: () => ({
                 uri: ''

@@ -1,33 +1,39 @@
 import { Controller, Post, Res, Body, HttpStatus, Get, Delete, Put, Req, Param, NotFoundException } from '@nestjs/common';
-import { NoteService } from './note.service';
-import { noteDTO } from './note.dto';
+import { NotesService } from './notes.service';
+import { notesDTO } from './notes.dto';
 import { identity } from 'rxjs';
 
 @Controller('notes')
-export class NoteController {
-    constructor (private readonly noteService: NoteService) {}
+export class NotesController {
+    constructor (private readonly notesService: NotesService) {}
 
     @Get('/')
     private async getNotes(@Res() res: any) {
-        const notes = await this.noteService.getNotes();
+        const notes = await this.notesService.getNotes();
         return res.status(HttpStatus.OK).json(notes);
+    }
+
+    @Get('/fav')
+    private async getFavNotes(@Res() res: any, @Param('favorite') favorite) {
+        const favNotes = await this.notesService.getFavNotes(favorite);
+        return res.status(HttpStatus.OK).json(favNotes);
     }
 
     @Get('/:id')
     private async getNote(@Res() res: any, @Param('id') id) {
-        const note = await this.noteService.getNote(id);
+        const note = await this.notesService.getNote(id);
         return res.status(HttpStatus.OK).json(note);
     }
 
     @Post('/')
-    private async postNote(@Res() res: any, @Body() DTO: noteDTO) {
-        const note = await this.noteService.postNote(DTO);
+    private async postNote(@Res() res: any, @Body() DTO: notesDTO) {
+        const note = await this.notesService.postNote(DTO);
         return res.status(HttpStatus.OK).json(note);
     }
 
     @Put('/:id')
-    private async puNote(@Res() res: any, @Param('id') id, @Body() DTO: noteDTO) {
-        const note = await this.noteService.putNote(id, DTO);
+    private async putNote(@Res() res: any, @Param('id') id, @Body() DTO: notesDTO) {
+        const note = await this.notesService.putNote(id, DTO);
         if (!note) throw new NotFoundException(`Note ${note.title} does not exist`);
         return res.status(HttpStatus.OK).json({
             message: `Note \"${note.title}\" has been successfully updated.`,
@@ -37,7 +43,7 @@ export class NoteController {
 
     @Delete('/:id')
     private async deleteNote(@Res() res: any, @Param('id') id) {
-        const note = await this.noteService.deleteNote(id);
+        const note = await this.notesService.deleteNote(id);
         if (!note) throw new NotFoundException(`Note ${note.title} does not exist`);
         return res.status(HttpStatus.OK).json({
             message: `Note \"${note.title}\" has been successfully deleted.`,

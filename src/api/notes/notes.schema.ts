@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export const NoteSchema = new Schema(
+export const NotesSchema = new Schema(
     {
         title: {
             type: String,
@@ -9,6 +9,11 @@ export const NoteSchema = new Schema(
         body: {
             type: String,
             required: true
+        },
+        favorite: {
+            type: String,
+            required: true,
+            default: false
         },
         createdAt: {
             type: Date,
