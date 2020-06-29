@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { ApiModule } from './api/api.module';
 import { MongoModule } from './database/mongo.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ApiModule, MongoModule, AuthModule],
+  imports: [ApiModule, MongoModule, AuthModule, ConfigModule.forRoot()],
   controllers: [AppController],
 })
 export class AppModule {}

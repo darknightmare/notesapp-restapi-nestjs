@@ -1,12 +1,13 @@
-import { Controller, Post, Res, Body, HttpStatus, Get, Delete, Put, Req, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpStatus, Get, Delete, Put, Param, NotFoundException, UseGuards } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { notesDTO } from './notes.dto';
-import { identity } from 'rxjs';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('notes')
 export class NotesController {
     constructor (private readonly notesService: NotesService) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get('/')
     private async getNotes(@Res() res: any) {
         const notes = await this.notesService.getNotes();
